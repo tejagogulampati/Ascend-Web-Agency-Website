@@ -1,336 +1,859 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ascend Web Agency - Elite Digital Engineering</title>
-    <meta name="description" content="Custom-coded websites that win. Premium web development for businesses that demand clean design, fast delivery, and real engineering.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascend Web Agency — Elite Digital Engineering</title>
+<meta name="description" content="Custom-coded websites that win. Premium web development for businesses that demand excellence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060608;--bg2:#0c0c10;--bg3:#111116;--bg4:#18181f;--bg5:#202028;
+  --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);
+  --white:#f4f4f6;--silver:#9898a8;--muted:#55556a;--dim:#2e2e3a;
+  --blue:#4f6ef7;--blue-soft:rgba(79,110,247,0.12);--blue-glow:rgba(79,110,247,0.22);
+  --teal:#38bdf8;--serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--silver);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:16px;font-weight:400;line-height:1.65}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity 0.7s ease,visibility 0.7s}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+.ldr-inner{display:flex;flex-direction:column;align-items:center;gap:1.75rem}
+.ldr-word{font-family:var(--serif);font-size:2rem;letter-spacing:0.05em;color:var(--white);overflow:hidden}
+.ldr-word span{display:inline-block;animation:ldrSlide 0.6s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transform:translateY(100%)}
+.ldr-word span:nth-child(1){animation-delay:0.05s}.ldr-word span:nth-child(2){animation-delay:0.10s}
+.ldr-word span:nth-child(3){animation-delay:0.15s}.ldr-word span:nth-child(4){animation-delay:0.20s}
+.ldr-word span:nth-child(5){animation-delay:0.25s}.ldr-word span:nth-child(6){animation-delay:0.30s}
+@keyframes ldrSlide{to{opacity:1;transform:translateY(0)}}
+.ldr-line{width:1px;height:40px;background:var(--line2);overflow:hidden;position:relative}
+.ldr-line::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--blue);animation:ldrDrop 1s 0.5s ease forwards;transform:translateY(-100%)}
+@keyframes ldrDrop{to{transform:translateY(100%)}}
+
+/* THREE CANVAS */
+#three-canvas{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.75rem 5rem;display:flex;align-items:center;justify-content:space-between;transition:padding 0.4s ease,background 0.4s ease,border-color 0.4s;border-bottom:1px solid transparent}
+.nav.stuck{padding:1.1rem 5rem;background:rgba(6,6,8,0.82);backdrop-filter:blur(20px) saturate(160%);border-bottom-color:var(--line)}
+.nav-logo{font-family:var(--serif);font-size:1.25rem;letter-spacing:0.01em;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:0.65rem}
+.nav-logo-mark{width:28px;height:28px;border-radius:7px;background:var(--blue);display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-size:0.8rem;font-weight:500;letter-spacing:0.02em;color:var(--white);background:var(--blue);padding:0.58rem 1.4rem;border-radius:7px;text-decoration:none;transition:opacity 0.2s,transform 0.2s;border:1px solid transparent}
+.nav-cta:hover{opacity:0.85;transform:translateY(-1px)}
+.nav-burger{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-burger span{display:block;width:20px;height:1px;background:var(--silver);transition:all 0.3s}
+
+/* MOBILE */
+.mob{display:none;position:fixed;inset:0;z-index:99;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:2.25rem}
+.mob.open{display:flex}
+.mob-x{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--muted);font-size:1.8rem;cursor:pointer;line-height:1}
+.mob a{font-family:var(--serif);font-size:2.2rem;color:var(--white);text-decoration:none;transition:color 0.2s}
+.mob a:hover{color:var(--blue)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-grid{position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 75% 65% at 50% 45%,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 45%,black 30%,transparent 80%)}
+.hero-glow{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 55% 45% at 50% 46%,rgba(79,110,247,0.07) 0%,transparent 70%)}
+.hero-body{position:relative;z-index:10;text-align:center;max-width:860px;padding:0 2rem}
+.hero-label{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;opacity:0;transform:translateY(12px);animation:up 0.7s 1.5s cubic-bezier(.16,1,.3,1) forwards}
+.hero-label::before,.hero-label::after{content:'';width:22px;height:1px;background:var(--dim)}
+.hero-h{font-family:var(--serif);font-size:clamp(3.4rem,9.5vw,8rem);font-weight:400;line-height:0.95;letter-spacing:-0.01em;color:var(--white);margin-bottom:2rem;opacity:0;transform:translateY(24px);animation:up 1s 1.7s cubic-bezier(.16,1,.3,1) forwards}
+.hero-h .italic{font-style:italic;color:var(--silver)}
+.hero-sub{font-size:1.05rem;font-weight:300;line-height:1.85;color:var(--muted);max-width:480px;margin:0 auto 3.5rem;opacity:0;transform:translateY(16px);animation:up 0.7s 2s cubic-bezier(.16,1,.3,1) forwards}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;opacity:0;transform:translateY(14px);animation:up 0.7s 2.2s cubic-bezier(.16,1,.3,1) forwards}
+.btn-p{display:inline-flex;align-items:center;gap:0.55rem;font-size:0.88rem;font-weight:500;color:#fff;background:var(--blue);padding:0.85rem 2rem;border-radius:8px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,110,247,0.35)}
+.btn-p svg{width:15px;height:15px;transition:transform 0.2s}
+.btn-p:hover svg{transform:translateX(3px)}
+.btn-s{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.88rem;font-weight:400;color:var(--silver);border:1px solid var(--line2);padding:0.85rem 2rem;border-radius:8px;text-decoration:none;transition:all 0.2s}
+.btn-s:hover{color:var(--white);border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.6rem;opacity:0;animation:up 0.7s 2.7s ease forwards}
+.hero-scroll span{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--dim)}
+.scroll-pill{width:1px;height:36px;background:var(--dim);overflow:hidden;position:relative}
+.scroll-pill::after{content:'';position:absolute;top:0;left:0;width:100%;height:50%;background:var(--silver);animation:scrollDrop 2s ease-in-out infinite}
+@keyframes scrollDrop{0%{transform:translateY(-100%);opacity:1}100%{transform:translateY(300%);opacity:0}}
+@keyframes up{to{opacity:1;transform:translateY(0)}}
+
+/* TICKER */
+.ticker{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.25rem 0;overflow:hidden;background:rgba(255,255,255,0.012)}
+.ticker-track{display:flex;align-items:center;gap:3.5rem;width:max-content;animation:tick 30s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);white-space:nowrap;flex-shrink:0;transition:color 0.2s}
+.ticker-item:hover{color:var(--silver)}
+.ticker-sep{width:3px;height:3px;border-radius:50%;background:var(--dim);flex-shrink:0}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+.s{position:relative;z-index:2}
+.w{max-width:1160px;margin:0 auto;padding:0 5rem}
+.kicker{display:inline-flex;align-items:center;gap:0.7rem;font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1.5rem}
+.kicker::before{content:'';width:18px;height:1px;background:var(--blue)}
+.sh{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:400;letter-spacing:-0.005em;color:var(--white);line-height:1.08;margin-bottom:1.25rem}
+.sh .it{font-style:italic;color:var(--silver)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity 0.85s cubic-bezier(.16,1,.3,1),transform 0.85s cubic-bezier(.16,1,.3,1)}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+.rv.d4{transition-delay:.32s}.rv.d5{transition-delay:.4s}.rv.d6{transition-delay:.48s}
+.rv.on{opacity:1;transform:translateY(0)}
+
+/* SERVICES */
+.services-s{padding:9rem 0}
+.svc-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:5rem}
+.svc-head-r p{font-size:0.93rem;color:var(--muted);line-height:1.9}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.svc{background:var(--bg2);padding:2.75rem 2.5rem;position:relative;overflow:hidden;transition:background 0.35s;cursor:default}
+.svc:hover{background:var(--bg3)}
+.svc::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(79,110,247,0.6),transparent);opacity:0;transition:opacity 0.4s}
+.svc:hover::after{opacity:1}
+.svc-n{font-size:0.6rem;letter-spacing:0.2em;color:var(--dim);margin-bottom:2rem;font-weight:500}
+.svc-ico{width:44px;height:44px;border-radius:11px;background:var(--blue-soft);border:1px solid rgba(79,110,247,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.75rem;transition:all 0.3s}
+.svc:hover .svc-ico{background:rgba(79,110,247,0.18);border-color:rgba(79,110,247,0.38)}
+.svc-ico svg{width:19px;height:19px;stroke:var(--blue);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.svc-h{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:0.75rem}
+.svc-p{font-size:0.855rem;color:var(--muted);line-height:1.82}
+
+/* STATS */
+.stats-s{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:5rem 0;background:var(--bg2)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:2.75rem 2.5rem;text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--serif);font-size:clamp(2.8rem,5vw,4.2rem);font-weight:400;color:var(--white);letter-spacing:-0.02em;line-height:1;margin-bottom:0.5rem}
+.stat-l{font-size:0.72rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;font-weight:400}
+
+/* PROCESS */
+.process-s{padding:9rem 0}
+.process-layout{display:grid;grid-template-columns:1fr 1.35fr;gap:7rem;margin-top:5rem;align-items:start}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:1.75rem;align-items:flex-start;padding:2rem 0;border-bottom:1px solid var(--line);transition:padding 0.3s}
+.step:first-child{padding-top:0}.step:last-child{border-bottom:none}
+.step-n{width:34px;height:34px;border-radius:50%;flex-shrink:0;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:0.65rem;letter-spacing:0.12em;color:var(--dim);font-weight:500;margin-top:2px;transition:all 0.3s}
+.step:hover .step-n{border-color:rgba(79,110,247,0.5);color:var(--blue);background:var(--blue-soft)}
+.step-h{font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--white);margin-bottom:0.5rem}
+.step-p{font-size:0.855rem;color:var(--muted);line-height:1.82}
+.process-panel{position:sticky;top:8rem;background:var(--bg3);border:1px solid var(--line);border-radius:18px;padding:3rem;display:flex;flex-direction:column;gap:2.5rem}
+.process-panel-tag{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.process-panel-h{font-family:var(--serif);font-size:1.55rem;font-weight:400;color:var(--white);line-height:1.25}
+.process-panel-p{font-size:0.875rem;color:var(--muted);line-height:1.85}
+.metrics{display:flex;flex-direction:column;gap:1.1rem}
+.metric-row{display:flex;flex-direction:column;gap:0.4rem}
+.metric-top{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted)}
+.metric-track{height:2px;background:var(--line2);border-radius:1px;overflow:hidden}
+.metric-bar{height:100%;border-radius:1px;transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
+.metric-bar.go{transform:scaleX(1)}
+
+/* PRICING */
+.pricing-s{padding:9rem 0;border-top:1px solid var(--line);background:var(--bg2)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:5rem}
+.plan{background:var(--bg2);padding:3rem 2.75rem;display:flex;flex-direction:column;position:relative;transition:background 0.3s}
+.plan:hover,.plan.pop{background:var(--bg3)}
+.plan-badge{position:absolute;top:2rem;right:2rem;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:#fff;background:var(--blue);padding:0.28rem 0.75rem;border-radius:100px}
+.plan-tier{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem}
+.plan-name{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--white);margin-bottom:0.5rem}
+.plan-desc{font-size:0.845rem;color:var(--muted);line-height:1.8;margin-bottom:2.25rem}
+.plan-price{font-family:var(--serif);font-size:3.6rem;font-weight:400;color:var(--white);letter-spacing:-0.02em;line-height:1;margin-bottom:0.4rem}
+.plan-price sup{font-size:1.2rem;vertical-align:super}
+.plan-note{font-size:0.75rem;color:var(--muted);margin-bottom:2.25rem}
+.plan-list{list-style:none;display:flex;flex-direction:column;gap:0.8rem;flex:1;margin-bottom:2.5rem}
+.plan-list li{font-size:0.845rem;color:var(--silver);display:flex;align-items:center;gap:0.7rem}
+.plan-list li svg{width:13px;height:13px;stroke:var(--teal);fill:none;stroke-width:2.5;flex-shrink:0}
+.plan-list li.off{color:var(--muted)}.plan-list li.off svg{stroke:var(--dim)}
+.pbtn{display:block;text-align:center;padding:0.85rem;border-radius:9px;font-size:0.855rem;font-weight:500;text-decoration:none;transition:all 0.25s;letter-spacing:0.01em}
+.pbtn.primary{background:var(--blue);color:#fff}
+.pbtn.primary:hover{box-shadow:0 0 28px rgba(79,110,247,0.4);transform:translateY(-1px)}
+.pbtn.ghost{border:1px solid var(--line2);color:var(--silver)}
+.pbtn.ghost:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.pricing-footer{margin-top:2.75rem;text-align:center;font-size:0.78rem;color:var(--dim);display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.pricing-footer svg{width:13px;height:13px;stroke:var(--dim);fill:none;stroke-width:2}
+.pricing-footer a{color:var(--silver);text-decoration:none;transition:color 0.2s}
+.pricing-footer a:hover{color:var(--white)}
+
+/* PORTFOLIO */
+.portfolio-s{padding:9rem 0}
+.port-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4.5rem;flex-wrap:wrap;gap:2rem}
+.port-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.port-card{background:var(--bg2);padding:3.5rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;min-height:290px;cursor:pointer;transition:background 0.3s}
+.port-card:hover{background:var(--bg3)}
+.port-sheen{position:absolute;inset:0;opacity:0;transition:opacity 0.5s;pointer-events:none}
+.port-sheen-blue{background:radial-gradient(ellipse at top right,rgba(79,110,247,0.07),transparent 60%)}
+.port-sheen-teal{background:radial-gradient(ellipse at top right,rgba(56,189,248,0.05),transparent 60%)}
+.port-card:hover .port-sheen{opacity:1}
+.port-arrow{position:absolute;top:2.5rem;right:2.5rem;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.port-card:hover .port-arrow{border-color:rgba(79,110,247,0.5);background:var(--blue-soft)}
+.port-arrow svg{width:13px;height:13px;stroke:var(--muted);fill:none;stroke-width:2;transition:stroke 0.3s}
+.port-card:hover .port-arrow svg{stroke:var(--blue)}
+.port-tag{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
+.port-h{font-family:var(--serif);font-size:1.65rem;font-weight:400;color:var(--white);margin-bottom:0.75rem;letter-spacing:-0.01em}
+.port-p{font-size:0.855rem;color:var(--muted);line-height:1.82;margin-bottom:2rem}
+.chips{display:flex;flex-wrap:wrap;gap:0.45rem}
+.chip{font-size:0.65rem;font-weight:400;letter-spacing:0.06em;padding:0.28rem 0.8rem;border-radius:100px;border:1px solid var(--line);color:var(--muted);transition:all 0.2s}
+.port-card:hover .chip{border-color:var(--line2);color:var(--silver)}
+.port-empty{align-items:center;justify-content:center;text-align:center;gap:0.6rem;display:flex;flex-direction:column}
+.port-empty p{font-size:0.9rem;color:var(--muted)}.port-empty small{font-size:0.75rem;color:var(--dim)}
+
+/* TESTIMONIALS */
+.testi-s{padding:9rem 0;border-top:1px solid var(--line);background:var(--bg2)}
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:4.5rem}
+.tcard{background:var(--bg3);border:1px solid var(--line);border-radius:16px;padding:2.75rem;transition:border-color 0.3s}
+.tcard:hover{border-color:var(--line2)}
+.tcard-stars{display:flex;gap:3px;margin-bottom:1.5rem}
+.star{width:11px;height:11px;background:var(--blue);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.tcard-q{font-size:0.92rem;font-weight:300;color:var(--silver);line-height:1.9;margin-bottom:2rem;font-style:italic}
+.tcard-who{display:flex;align-items:center;gap:1rem}
+.tcard-av{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:var(--blue-soft);border:1px solid rgba(79,110,247,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.8rem;color:var(--blue)}
+.tcard-name{font-size:0.855rem;font-weight:500;color:var(--white)}.tcard-role{font-size:0.75rem;color:var(--muted)}
+
+/* CTA */
+.cta-s{padding:11rem 0;position:relative;overflow:hidden}
+.cta-radial{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(79,110,247,0.07) 0%,transparent 70%)}
+.cta-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent);-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent)}
+.cta-inner{text-align:center;position:relative;z-index:2;max-width:680px;margin:0 auto;padding:0 2rem}
+.cta-h{font-family:var(--serif);font-size:clamp(2.8rem,7vw,6.2rem);font-weight:400;color:var(--white);letter-spacing:-0.015em;line-height:1.0;margin-bottom:1.5rem}
+.cta-h em{font-style:italic;color:var(--silver)}
+.cta-sub{font-size:0.98rem;color:var(--muted);line-height:1.85;margin-bottom:3.5rem}
+.cta-actions{display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.cta-email{font-size:0.82rem;color:var(--muted);text-decoration:none;transition:color 0.2s;letter-spacing:0.02em}
+.cta-email:hover{color:var(--silver)}
+
+/* FOOTER */
+footer{padding:4rem 5rem;border-top:1px solid var(--line);position:relative;z-index:2}
+.foot-row{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.foot-logo{font-family:var(--serif);font-size:1rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.6rem}
+.foot-logo-m{width:22px;height:22px;border-radius:5px;background:var(--blue);display:flex;align-items:center;justify-content:center}
+.foot-logo-m svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.foot-links{display:flex;gap:2rem;flex-wrap:wrap}
+.foot-links a{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.foot-links a:hover{color:var(--muted)}
+.foot-soc{display:flex;gap:0.65rem}
+.soc-a{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:border-color 0.2s}
+.soc-a:hover{border-color:var(--line2)}
+.soc-a svg{width:13px;height:13px;stroke:var(--dim);fill:none;stroke-width:1.75;transition:stroke 0.2s}
+.soc-a:hover svg{stroke:var(--muted)}
+.foot-copy{font-size:0.7rem;color:var(--dim)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .nav,.nav.stuck{padding:1.25rem 2.5rem}
+  footer{padding:3rem 2.5rem}.w{padding:0 2.5rem}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(3){border-top:1px solid var(--line)}
+  .stat:nth-child(4){border-top:1px solid var(--line);border-right:none}
+  .process-layout{grid-template-columns:1fr;gap:3.5rem}
+  .process-panel{position:static}.svc-head{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:720px){
+  .nav,.nav.stuck{padding:1.1rem 1.5rem}.w{padding:0 1.5rem}
+  footer{padding:2.5rem 1.5rem}.nav-links,.nav-cta{display:none}
+  .nav-burger{display:flex}.svc-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}.plans{grid-template-columns:1fr}
+  .port-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}
+  .foot-row{flex-direction:column;align-items:flex-start;gap:1.75rem}
+  .port-head{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
-    <div id="loader" aria-hidden="true">
-        <div class="ldr-inner">
-            <div class="ldr-word"><span>A</span><span>S</span><span>C</span><span>E</span><span>N</span><span>D</span></div>
-            <div class="ldr-line"></div>
-        </div>
-    </div>
 
-    <nav class="nav" id="nav">
-        <a href="index.html" class="nav-logo" aria-label="Ascend Web Agency home">
-            <span class="nav-logo-mark"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></span>
-            Ascend Web Agency
-        </a>
-        <ul class="nav-links">
-            <li><a class="active" href="index.html">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="portfolio.html">Work</a></li>
-            <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+<div id="loader">
+  <div class="ldr-inner">
+    <div class="ldr-word"><span>A</span><span>S</span><span>C</span><span>E</span><span>N</span><span>D</span></div>
+    <div class="ldr-line"></div>
+  </div>
+</div>
+
+<div class="mob" id="mob">
+  <button class="mob-x" id="mobX">&times;</button>
+  <a href="#services">Services</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#portfolio">Work</a>
+  <a href="#contact">Contact</a>
+  <a href="https://tally.so/r/2EXdoA" target="_blank" style="color:var(--blue)">Get Quote</a>
+</div>
+
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"/><line x1="7" y1="4" x2="7" y2="13"/></svg></div>
+    Ascend
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://tally.so/r/2EXdoA" target="_blank" class="nav-cta">Get a Quote</a>
+  <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="hero">
+  <canvas id="three-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-body">
+    <div class="hero-label">Elite Web Engineering</div>
+    <h1 class="hero-h">We build websites<br>that <span class="italic">convert.</span></h1>
+    <p class="hero-sub">Custom-coded, performance-obsessed digital experiences. No templates. No bloat. Just clean code that wins.</p>
+    <div class="hero-btns">
+      <a href="https://tally.so/r/2EXdoA" target="_blank" class="btn-p">
+        Start a project
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+      </a>
+      <a href="#portfolio" class="btn-s">See our work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-pill"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Custom Development</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Responsive Design</span><span class="ticker-sep"></span>
+    <span class="ticker-item">E-Commerce</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Performance</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Backend Engineering</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Brand Identity</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Post-Launch Support</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Social Media</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Custom Development</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Responsive Design</span><span class="ticker-sep"></span>
+    <span class="ticker-item">E-Commerce</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Performance</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Backend Engineering</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Brand Identity</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Post-Launch Support</span><span class="ticker-sep"></span>
+    <span class="ticker-item">Social Media</span><span class="ticker-sep"></span>
+  </div>
+</div>
+
+<section class="s services-s" id="services">
+  <div class="w">
+    <div class="svc-head">
+      <div class="rv">
+        <div class="kicker">What we do</div>
+        <h2 class="sh">Full-spectrum<br>web <span class="it">engineering.</span></h2>
+      </div>
+      <div class="svc-head-r rv d2">
+        <p>No Wix. No Squarespace. No page builders. Every site is hand-written code — fast, clean, and built to perform. Frontend, backend, and everything in between.</p>
+      </div>
+    </div>
+    <div class="svc-grid rv">
+      <div class="svc"><div class="svc-n">01</div><div class="svc-ico"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h3 class="svc-h">Custom Web Development</h3><p class="svc-p">Bespoke sites built from scratch. Hand-written code that's fast, maintainable, and entirely yours.</p></div>
+      <div class="svc"><div class="svc-n">02</div><div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><h3 class="svc-h">Responsive Design</h3><p class="svc-p">Mobile-first layouts that look flawless on every screen, tested on real devices — not just dev tools.</p></div>
+      <div class="svc"><div class="svc-n">03</div><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3 class="svc-h">Performance Optimization</h3><p class="svc-p">Sub-second load times, perfect Core Web Vitals, and smooth interactions that keep visitors engaged.</p></div>
+      <div class="svc"><div class="svc-n">04</div><div class="svc-ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><h3 class="svc-h">Backend Development</h3><p class="svc-p">APIs, databases, auth flows, server logic. Full-stack under one roof — nothing gets pieced together badly.</p></div>
+      <div class="svc"><div class="svc-n">05</div><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><h3 class="svc-h">E-Commerce Solutions</h3><p class="svc-p">Stripe-integrated storefronts, custom checkout flows, inventory logic — built for real revenue from day one.</p></div>
+      <div class="svc"><div class="svc-n">06</div><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="svc-h">Post-Launch Support</h3><p class="svc-p">Ongoing maintenance, updates, and dedicated support. We don't disappear after delivery.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s stats-s">
+  <div class="w">
+    <div class="stats-row">
+      <div class="stat rv"><div class="stat-n">5–7</div><div class="stat-l">Business Days Delivery</div></div>
+      <div class="stat rv d1"><div class="stat-n">100%</div><div class="stat-l">Custom Code</div></div>
+      <div class="stat rv d2"><div class="stat-n">24hr</div><div class="stat-l">Response Time</div></div>
+      <div class="stat rv d3"><div class="stat-n">$0</div><div class="stat-l">Hidden Fees</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s process-s">
+  <div class="w">
+    <div class="rv">
+      <div class="kicker">How it works</div>
+      <h2 class="sh">Brief to launched<br><span class="it">in days.</span></h2>
+    </div>
+    <div class="process-layout">
+      <div class="steps rv d1">
+        <div class="step"><div class="step-n">01</div><div><h3 class="step-h">Discovery</h3><p class="step-p">We learn your business, goals, and audience before writing a single line of code. No guesswork.</p></div></div>
+        <div class="step"><div class="step-n">02</div><div><h3 class="step-h">Design</h3><p class="step-p">High-fidelity mockups built around your brand. You approve before development begins.</p></div></div>
+        <div class="step"><div class="step-n">03</div><div><h3 class="step-h">Development</h3><p class="step-p">Clean, optimized, modular code. Delivered in 5–7 business days without cutting corners.</p></div></div>
+        <div class="step"><div class="step-n">04</div><div><h3 class="step-h">Launch &amp; Support</h3><p class="step-p">Full deployment, cross-browser testing, and post-launch monitoring. We stay on-call.</p></div></div>
+      </div>
+      <div class="process-panel rv d2">
+        <div class="process-panel-tag">Why it works</div>
+        <h3 class="process-panel-h">Built by engineers.<br>Obsessed with quality.</h3>
+        <p class="process-panel-p">We're developers — not designers who dabble in code. Every deliverable is production-quality, maintainable, and yours to own forever.</p>
+        <div class="metrics">
+          <div class="metric-row"><div class="metric-top"><span>Page Speed</span><span>98</span></div><div class="metric-track"><div class="metric-bar" style="width:98%;background:var(--blue)"></div></div></div>
+          <div class="metric-row"><div class="metric-top"><span>SEO Score</span><span>95</span></div><div class="metric-track"><div class="metric-bar" style="width:95%;background:var(--teal)"></div></div></div>
+          <div class="metric-row"><div class="metric-top"><span>Accessibility</span><span>100</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:#a3e635"></div></div></div>
+          <div class="metric-row"><div class="metric-top"><span>Best Practices</span><span>100</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:var(--blue)"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s pricing-s" id="pricing">
+  <div class="w">
+    <div class="rv">
+      <div class="kicker">Packages</div>
+      <h2 class="sh">Transparent pricing.<br><span class="it">No surprises.</span></h2>
+    </div>
+    <div class="plans rv">
+      <div class="plan">
+        <div class="plan-tier">Standard</div>
+        <div class="plan-name">Standard Website</div>
+        <div class="plan-desc">A great-looking, fully responsive website for businesses that need a strong online presence.</div>
+        <div class="plan-price"><sup>$</sup>600</div>
+        <div class="plan-note">One-time payment</div>
+        <ul class="plan-list">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Professional Design</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile Responsive</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic SEO Setup</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Contact Form</li>
+          <li class="off"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Backend Features</li>
         </ul>
-        <a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="nav-cta">Get Quote</a>
-        <button class="nav-burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
-
-    <div class="mob" id="mob" aria-hidden="true">
-        <button class="mob-x" id="mobX" type="button" aria-label="Close menu">&times;</button>
-        <a class="active" href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="portfolio.html">Work</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="https://buy.stripe.com/test_aFa6oAddP57MaKb6yS3VC02" class="pbtn ghost">Order Standard</a>
+      </div>
+      <div class="plan pop">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-tier" style="color:var(--blue)">Advanced</div>
+        <div class="plan-name">Advanced + Backend</div>
+        <div class="plan-desc">For complex needs requiring backend logic, integrations, and premium design.</div>
+        <div class="plan-price"><sup>$</sup>900</div>
+        <div class="plan-note">One-time payment</div>
+        <ul class="plan-list">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Premium Design</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Backend Integrations</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Advanced SEO</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>CMS Integration</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Complex Features</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_bJefZa4Hj0RwcSj0au3VC01" class="pbtn primary">Order Advanced</a>
+      </div>
+      <div class="plan">
+        <div class="plan-tier">Monthly</div>
+        <div class="plan-name">Social Media Management</div>
+        <div class="plan-desc">We manage your social presence to drive consistent traffic to your site.</div>
+        <div class="plan-price"><sup>$</sup>150</div>
+        <div class="plan-note">Per month, cancel anytime</div>
+        <ul class="plan-list">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Content Creation</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Scheduled Posting</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Community Engagement</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Monthly Strategy</li>
+          <li class="off"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Website Included</li>
+        </ul>
+        <a href="https://buy.stripe.com/test_14AcMYa1Dbwa05xbTc3VC00" class="pbtn ghost">Subscribe Monthly</a>
+      </div>
     </div>
+    <div class="pricing-footer rv">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Secure payments via Stripe &nbsp;&mdash;&nbsp; Need something custom? <a href="mailto:ascendwebagency1@gmail.com">Contact us</a>
+    </div>
+  </div>
+</section>
 
-    <main>
-        <section class="hero">
-            <canvas id="three-canvas" aria-hidden="true"></canvas>
-            <div class="hero-grid"></div>
-            <div class="hero-glow"></div>
-            <div class="hero-body">
-                <div class="hero-label">Custom-coded websites</div>
-                <h1 class="hero-h">Websites that <span class="italic">perform.</span></h1>
-                <p class="hero-sub">Ascend builds fast, polished, production-ready websites for businesses that need more than a template and a contact form.</p>
-                <div class="hero-btns">
-                    <a href="portfolio.html" class="btn-p">
-                        View work
-                        <svg viewBox="0 0 20 20"><path d="M4 10h12M10 4l6 6-6 6"></path></svg>
-                    </a>
-                    <a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="btn-s">Start a project</a>
-                </div>
-            </div>
-            <div class="hero-scroll" aria-hidden="true">
-                <span>Scroll</span>
-                <div class="scroll-pill"></div>
-            </div>
-        </section>
-
-        <section class="ticker" aria-label="Capabilities">
-            <div class="ticker-track">
-                <span class="ticker-item">Custom development</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Responsive design</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Backend systems</span><span class="ticker-sep"></span>
-                <span class="ticker-item">E-commerce</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Performance optimization</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Post-launch support</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Custom development</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Responsive design</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Backend systems</span><span class="ticker-sep"></span>
-                <span class="ticker-item">E-commerce</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Performance optimization</span><span class="ticker-sep"></span>
-                <span class="ticker-item">Post-launch support</span><span class="ticker-sep"></span>
-            </div>
-        </section>
-
-        <section class="s section-pad" id="services">
-            <div class="w">
-                <div class="split-head">
-                    <div class="rv">
-                        <div class="kicker">Services</div>
-                        <h2 class="sh">Clean builds for<br><span class="it">serious businesses.</span></h2>
-                    </div>
-                    <div class="rv d1">
-                        <p class="lead">We handle the full stack: strategy, interface design, frontend engineering, backend logic, payment flows, and the launch details that make a site feel finished.</p>
-                    </div>
-                </div>
-                <div class="svc-grid rv">
-                    <div class="svc">
-                        <div class="svc-n">01</div>
-                        <div class="svc-ico"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
-                        <h3 class="svc-h">Custom Web Development</h3>
-                        <p class="svc-p">Bespoke sites built from scratch. Hand-written code that is fast, maintainable, and entirely yours.</p>
-                    </div>
-                    <div class="svc">
-                        <div class="svc-n">02</div>
-                        <div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
-                        <h3 class="svc-h">Responsive Design</h3>
-                        <p class="svc-p">Mobile-first layouts that stay sharp on every screen, from landing pages to larger product experiences.</p>
-                    </div>
-                    <div class="svc">
-                        <div class="svc-n">03</div>
-                        <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
-                        <h3 class="svc-h">Performance Optimization</h3>
-                        <p class="svc-p">Fast page loads, smooth interactions, and technical decisions that help people stay on the site.</p>
-                    </div>
-                    <div class="svc">
-                        <div class="svc-n">04</div>
-                        <div class="svc-ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
-                        <h3 class="svc-h">Backend Development</h3>
-                        <p class="svc-p">APIs, databases, auth flows, dashboards, and server logic when the project needs more than static pages.</p>
-                    </div>
-                    <div class="svc">
-                        <div class="svc-n">05</div>
-                        <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
-                        <h3 class="svc-h">E-Commerce Solutions</h3>
-                        <p class="svc-p">Stripe-integrated storefronts, custom checkout flows, product pages, and logic built for revenue.</p>
-                    </div>
-                    <div class="svc">
-                        <div class="svc-n">06</div>
-                        <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                        <h3 class="svc-h">Post-Launch Support</h3>
-                        <p class="svc-p">Deployment help, maintenance, updates, and practical support after the site goes live.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="s stats-s">
-            <div class="w">
-                <div class="stats-row">
-                    <div class="stat rv"><div class="stat-n">5-7</div><div class="stat-l">Business Days Delivery</div></div>
-                    <div class="stat rv d1"><div class="stat-n">100%</div><div class="stat-l">Custom Code</div></div>
-                    <div class="stat rv d2"><div class="stat-n">24hr</div><div class="stat-l">Response Time</div></div>
-                    <div class="stat rv d3"><div class="stat-n">$0</div><div class="stat-l">Hidden Fees</div></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="s section-pad">
-            <div class="w">
-                <div class="rv">
-                    <div class="kicker">How it works</div>
-                    <h2 class="sh">Brief to launched<br><span class="it">in days.</span></h2>
-                </div>
-                <div class="process-layout">
-                    <div class="steps rv d1">
-                        <div class="step"><div class="step-n">01</div><div><h3 class="step-h">Discovery</h3><p class="step-p">We learn the business, goals, audience, content needs, and technical requirements before writing code.</p></div></div>
-                        <div class="step"><div class="step-n">02</div><div><h3 class="step-h">Design</h3><p class="step-p">High-fidelity layouts are built around the brand and approved before development starts.</p></div></div>
-                        <div class="step"><div class="step-n">03</div><div><h3 class="step-h">Development</h3><p class="step-p">Clean, optimized, modular code is shipped quickly without turning the project into a template.</p></div></div>
-                        <div class="step"><div class="step-n">04</div><div><h3 class="step-h">Launch &amp; Support</h3><p class="step-p">Deployment, cross-browser checks, analytics basics, and post-launch help are handled with the build.</p></div></div>
-                    </div>
-                    <div class="process-panel rv d2">
-                        <div class="process-panel-tag">Why it works</div>
-                        <h3 class="process-panel-h">Built by engineers.<br>Obsessed with quality.</h3>
-                        <p class="process-panel-p">Ascend writes real production code, not dragged-together page-builder blocks. That keeps the final site faster, cleaner, and easier to own.</p>
-                        <div class="metrics">
-                            <div class="metric-row"><div class="metric-top"><span>Page Speed</span><span>98</span></div><div class="metric-track"><div class="metric-bar" style="width:98%;background:var(--blue)"></div></div></div>
-                            <div class="metric-row"><div class="metric-top"><span>SEO Setup</span><span>95</span></div><div class="metric-track"><div class="metric-bar" style="width:95%;background:var(--teal)"></div></div></div>
-                            <div class="metric-row"><div class="metric-top"><span>Accessibility</span><span>100</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:var(--green)"></div></div></div>
-                            <div class="metric-row"><div class="metric-top"><span>Ownership</span><span>100</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:var(--blue)"></div></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="s section-pad section-line section-bg" id="pricing">
-            <div class="w">
-                <div class="rv">
-                    <div class="kicker">Packages</div>
-                    <h2 class="sh">Transparent pricing.<br><span class="it">No surprises.</span></h2>
-                </div>
-                <div class="plans rv">
-                    <div class="plan">
-                        <div class="plan-tier">Standard</div>
-                        <div class="plan-name">Standard Website</div>
-                        <div class="plan-desc">A polished, responsive website for businesses that need a strong online presence.</div>
-                        <div class="plan-price"><sup>$</sup>600</div>
-                        <div class="plan-note">One-time payment</div>
-                        <ul class="plan-list">
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Professional design</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Mobile responsive</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Basic SEO setup</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Contact form</li>
-                            <li class="off"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Backend features</li>
-                        </ul>
-                        <a href="https://buy.stripe.com/test_aFa6oAddP57MaKb6yS3VC02" class="pbtn ghost">Order Standard</a>
-                    </div>
-                    <div class="plan pop">
-                        <div class="plan-badge">Most Popular</div>
-                        <div class="plan-tier">Advanced</div>
-                        <div class="plan-name">Advanced + Backend</div>
-                        <div class="plan-desc">For complex needs requiring backend logic, integrations, and premium design.</div>
-                        <div class="plan-price"><sup>$</sup>900</div>
-                        <div class="plan-note">One-time payment</div>
-                        <ul class="plan-list">
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Premium design</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Backend integrations</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Advanced SEO</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>CMS integration</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Complex features</li>
-                        </ul>
-                        <a href="https://buy.stripe.com/test_bJefZa4Hj0RwcSj0au3VC01" class="pbtn primary">Order Advanced</a>
-                    </div>
-                    <div class="plan">
-                        <div class="plan-tier">Monthly</div>
-                        <div class="plan-name">Social Media Management</div>
-                        <div class="plan-desc">Ongoing social presence work to drive consistent attention back to the business.</div>
-                        <div class="plan-price"><sup>$</sup>150</div>
-                        <div class="plan-note">Per month, cancel anytime</div>
-                        <ul class="plan-list">
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Content creation</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Scheduled posting</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Community engagement</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Monthly strategy</li>
-                            <li class="off"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Website included</li>
-                        </ul>
-                        <a href="https://buy.stripe.com/test_14AcMYa1Dbwa05xbTc3VC00" class="pbtn ghost">Subscribe Monthly</a>
-                    </div>
-                </div>
-                <div class="pricing-footer rv">
-                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Secure payments via Stripe. Need something custom? <a href="contact.html">Contact us</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="s section-pad" id="portfolio">
-            <div class="w">
-                <div class="port-head rv">
-                    <div>
-                        <div class="kicker">Our work</div>
-                        <h2 class="sh">Built for real<br><span class="it">businesses.</span></h2>
-                    </div>
-                    <a href="portfolio.html" class="btn-s">View portfolio</a>
-                </div>
-                <div class="port-grid rv">
-                    <a class="port-card" href="https://langsontraders.netlify.app/" target="_blank" rel="noopener">
-                        <div class="port-arrow"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"></path></svg></div>
-                        <div>
-                            <div class="port-tag">E-Commerce - Custom Dev</div>
-                            <h3 class="port-h">Lang Son Traders</h3>
-                            <p class="port-p">Martial arts equipment store with e-commerce, custom product pages, and a brand-forward design built to convert.</p>
-                        </div>
-                        <div class="chips">
-                            <span class="chip">E-Commerce</span><span class="chip">Responsive</span><span class="chip">Brand Identity</span><span class="chip">Stripe</span>
-                        </div>
-                    </a>
-                    <div class="port-card port-empty">
-                        <p class="port-p">More case studies arriving soon.</p>
-                        <span class="small-tag">Currently finishing active client work</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="s section-pad section-line section-bg">
-            <div class="w">
-                <div class="rv">
-                    <div class="kicker">Testimonials</div>
-                    <h2 class="sh">Trusted by clients<br>who care about <span class="it">quality.</span></h2>
-                </div>
-                <div class="testi-grid">
-                    <div class="tcard rv d1">
-                        <div class="tcard-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p class="tcard-q">"Ascend delivered a site that looks like it belongs to a brand ten times our size. The attention to detail, speed, and support were exceptional."</p>
-                        <div class="tcard-who"><div class="tcard-av">LS</div><div><div class="tcard-name">Lang Son Traders</div><div class="tcard-role">Martial Arts Equipment</div></div></div>
-                    </div>
-                    <div class="tcard rv d2">
-                        <div class="tcard-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                        <p class="tcard-q">"They actually wrote real code. No Wix, no templates. Clean, fast, custom work that loads instantly and feels professional."</p>
-                        <div class="tcard-who"><div class="tcard-av">EC</div><div><div class="tcard-name">E-Commerce Client</div><div class="tcard-role">Online Retail</div></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="s cta-s" id="contact">
-            <div class="cta-radial"></div>
-            <div class="cta-grid"></div>
-            <div class="w">
-                <div class="cta-inner rv">
-                    <div class="kicker">Get in touch</div>
-                    <h2 class="cta-h">Ready to<br><em>Ascend?</em></h2>
-                    <p class="cta-sub">Tell us what you are building. We will respond within 24 hours with a clear plan and transparent next steps.</p>
-                    <div class="cta-actions">
-                        <a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="btn-p">
-                            Start your project
-                            <svg viewBox="0 0 20 20"><path d="M4 10h12M10 4l6 6-6 6"></path></svg>
-                        </a>
-                        <a href="mailto:ascendwebagency1@gmail.com" class="cta-email">ascendwebagency1@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="foot-row">
-            <a href="index.html" class="foot-logo">
-                <div class="foot-logo-m"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></div>
-                Ascend Web Agency
-            </a>
-            <nav class="foot-links" aria-label="Footer navigation">
-                <a href="services.html">Services</a><a href="pricing.html">Pricing</a>
-                <a href="portfolio.html">Work</a><a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            <div class="foot-soc">
-                <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" rel="noopener" class="soc-a" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" rel="noopener" class="soc-a" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" rel="noopener" class="soc-a" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
-            </div>
-            <div class="foot-copy">&copy; 2026 Ascend Web Agency. Custom web development, built clean.</div>
+<section class="s portfolio-s" id="portfolio">
+  <div class="w">
+    <div class="port-head rv">
+      <div>
+        <div class="kicker">Our work</div>
+        <h2 class="sh">Built for real<br><span class="it">businesses.</span></h2>
+      </div>
+      <a href="mailto:ascendwebagency1@gmail.com" class="btn-s">Start a project</a>
+    </div>
+    <div class="port-grid rv">
+      <div class="port-card" onclick="window.open('https://langsontraders.netlify.app/','_blank')">
+        <div class="port-sheen port-sheen-blue"></div>
+        <div class="port-arrow"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></div>
+        <div>
+          <div class="port-tag">E-Commerce &mdash; Custom Dev</div>
+          <h3 class="port-h">Lang Son Traders</h3>
+          <p class="port-p">Martial arts equipment store with full e-commerce, custom product pages, and a brand-forward design built to convert.</p>
         </div>
-    </footer>
+        <div class="chips">
+          <span class="chip">E-Commerce</span><span class="chip">Responsive</span><span class="chip">Brand Identity</span><span class="chip">Stripe</span>
+        </div>
+      </div>
+      <div class="port-card port-empty">
+        <div class="port-sheen port-sheen-teal"></div>
+        <p>More case studies arriving soon.</p>
+        <small>Currently finishing active client work.</small>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="script.js"></script>
+<section class="s testi-s">
+  <div class="w">
+    <div class="rv">
+      <div class="kicker">Testimonials</div>
+      <h2 class="sh">Trusted by clients<br>who care about <span class="it">quality.</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard rv d1">
+        <div class="tcard-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <p class="tcard-q">"Ascend delivered a site that looks like it belongs to a brand ten times our size. The attention to detail, the speed, and post-launch support were all exceptional."</p>
+        <div class="tcard-who"><div class="tcard-av">LS</div><div><div class="tcard-name">Lang Son Traders</div><div class="tcard-role">Martial Arts Equipment</div></div></div>
+      </div>
+      <div class="tcard rv d2">
+        <div class="tcard-stars"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
+        <p class="tcard-q">"They actually wrote real code. No Wix, no templates. Clean, fast, custom work that loads instantly. Our conversion rate improved significantly after launch."</p>
+        <div class="tcard-who"><div class="tcard-av">EC</div><div><div class="tcard-name">E-Commerce Client</div><div class="tcard-role">Online Retail</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s cta-s" id="contact">
+  <div class="cta-radial"></div>
+  <div class="cta-grid"></div>
+  <div class="w">
+    <div class="cta-inner rv">
+      <div class="kicker" style="justify-content:center;margin-bottom:1.5rem">Get in touch</div>
+      <h2 class="cta-h">Ready to<br><em>Ascend?</em></h2>
+      <p class="cta-sub">Tell us what you're building. We'll respond within 24 hours with a clear plan and a transparent quote.</p>
+      <div class="cta-actions">
+        <a href="https://tally.so/r/2EXdoA" target="_blank" class="btn-p" style="font-size:0.95rem;padding:0.95rem 2.5rem">
+          Start your project
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10h12M10 4l6 6-6 6"/></svg>
+        </a>
+        <a href="mailto:ascendwebagency1@gmail.com" class="cta-email">ascendwebagency1@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-row">
+    <a href="#" class="foot-logo">
+      <div class="foot-logo-m"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"/><line x1="7" y1="4" x2="7" y2="13"/></svg></div>
+      Ascend Web Agency
+    </a>
+    <nav class="foot-links">
+      <a href="#services">Services</a><a href="#pricing">Pricing</a>
+      <a href="#portfolio">Work</a><a href="#contact">Contact</a>
+      <a href="https://tally.so/r/2EXdoA" target="_blank">Get Quote</a>
+    </nav>
+    <div class="foot-soc">
+      <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" class="soc-a" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" class="soc-a" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" class="soc-a" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+    </div>
+    <div class="foot-copy">&copy; 2025 Ascend Web Agency</div>
+  </div>
+</footer>
+
+<script>
+/* LOADER */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('out'), 900);
+});
+
+/* ── THREE.JS HERO BACKGROUND — GLASSMORPHISM DATA GRID ───────────────
+   Premium enterprise aesthetic: perspective grid extending into depth,
+   floating glass panels, animated data streams, multi-layer parallax.
+   Everything is kept subtle — atmosphere, not noise.
+────────────────────────────────────────────────────────────────────── */
+(function() {
+  var canvas = document.getElementById('three-canvas');
+  var hero   = canvas.parentElement;
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+
+  var scene  = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
+  camera.position.set(0, 2.5, 14);
+  camera.lookAt(0, -1, 0);
+
+  /* ── MASTER GROUP for parallax ── */
+  var masterGroup = new THREE.Group();
+  scene.add(masterGroup);
+
+  /* ────────────────────────────────────────────────────
+     1. PERSPECTIVE GRID — extends into depth
+  ──────────────────────────────────────────────────── */
+  var gridGroup = new THREE.Group();
+  masterGroup.add(gridGroup);
+
+  var GRID_COLOR_1 = 0x4f6ef7;
+  var GRID_COLOR_2 = 0x38bdf8;
+
+  /* Horizontal lines fading into depth */
+  var hLineMat = new THREE.LineBasicMaterial({ color: GRID_COLOR_1, transparent: true, opacity: 0.055 });
+  for (var hz = 0; hz <= 28; hz++) {
+    var hGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-18, 0, -hz * 1.4),
+      new THREE.Vector3( 18, 0, -hz * 1.4)
+    ]);
+    gridGroup.add(new THREE.Line(hGeo, hLineMat));
+  }
+
+  /* Vertical lines converging at vanishing point */
+  var vLineMat = new THREE.LineBasicMaterial({ color: GRID_COLOR_1, transparent: true, opacity: 0.045 });
+  for (var vx = -18; vx <= 18; vx += 2.0) {
+    var vGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(vx,         0,  2),
+      new THREE.Vector3(vx * 0.05, 0, -40)
+    ]);
+    gridGroup.add(new THREE.Line(vGeo, vLineMat));
+  }
+
+  gridGroup.rotation.x = -Math.PI * 0.42;
+  gridGroup.position.set(0, -4.5, 2);
+
+  /* ────────────────────────────────────────────────────
+     2. GLASS PANELS — floating semi-transparent planes
+  ──────────────────────────────────────────────────── */
+  var panelGroup = new THREE.Group();
+  masterGroup.add(panelGroup);
+
+  var panelDefs = [
+    /* [x,  y,    z,    w,    h,    rotY,         rotX,         opacity, color        ] */
+    [  4.8,  0.6, -2.2,  3.8,  2.4,  Math.PI*0.08,  Math.PI*0.04, 0.045,  0x4f6ef7 ],
+    [ -5.2,  0.2, -3.5,  3.2,  2.0, -Math.PI*0.10, -Math.PI*0.03, 0.038,  0x38bdf8 ],
+    [  2.0, -1.6, -5.5,  5.0,  2.8,  Math.PI*0.04,  Math.PI*0.02, 0.032,  0x4f6ef7 ],
+    [ -3.0,  2.0, -7.0,  4.2,  1.8, -Math.PI*0.06,  0,            0.028,  0x5577ff ],
+    [  6.5, -0.8, -8.0,  2.4,  3.6,  Math.PI*0.14, -Math.PI*0.04, 0.022,  0x38bdf8 ],
+    [ -7.0,  1.4, -9.5,  3.0,  2.0, -Math.PI*0.09,  Math.PI*0.05, 0.020,  0x4f6ef7 ],
+    [  0.5,  2.8, -11,   6.0,  1.4,  Math.PI*0.02,  0,            0.018,  0x5577ff ],
+  ];
+
+  var panels = [];
+  panelDefs.forEach(function(d) {
+    /* Panel face */
+    var geo  = new THREE.PlaneGeometry(d[3], d[4]);
+    var mat  = new THREE.MeshBasicMaterial({
+      color: d[8], transparent: true, opacity: d[7], side: THREE.DoubleSide
+    });
+    var mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(d[0], d[1], d[2]);
+    mesh.rotation.y = d[5];
+    mesh.rotation.x = d[6];
+    panelGroup.add(mesh);
+
+    /* Edge highlight — thin wireframe box slightly larger */
+    var edgeGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(d[3] + 0.02, d[4] + 0.02, 0.01));
+    var edgeMat = new THREE.LineBasicMaterial({ color: d[8], transparent: true, opacity: 0.22 });
+    var edgeMesh = new THREE.LineSegments(edgeGeo, edgeMat);
+    edgeMesh.position.copy(mesh.position);
+    edgeMesh.rotation.copy(mesh.rotation);
+    panelGroup.add(edgeMesh);
+
+    /* Store for floating animation */
+    panels.push({ mesh: mesh, edge: edgeMesh, baseY: d[1], phase: Math.random() * Math.PI * 2 });
+  });
+
+  /* ────────────────────────────────────────────────────
+     3. NODE NETWORK — dots connected by lines
+  ──────────────────────────────────────────────────── */
+  var nodeGroup = new THREE.Group();
+  masterGroup.add(nodeGroup);
+
+  /* Node positions */
+  var nodePositions = [
+    [ 3.5,  1.2, -1.5], [-2.8,  0.8, -2.0], [ 0.5, -0.5, -1.8],
+    [ 5.2, -0.6, -3.5], [-4.5,  1.8, -4.2], [ 1.8,  2.4, -4.8],
+    [-1.2, -1.4, -3.0], [ 4.0,  0.5, -6.0], [-3.5, -0.8, -6.5],
+    [ 0.0,  1.5, -7.5], [-6.0,  0.5, -5.0], [ 6.2,  1.0, -5.5],
+  ];
+
+  var dotMat = new THREE.MeshBasicMaterial({ color: 0x4f6ef7, transparent: true, opacity: 0.55 });
+  var dotGeo = new THREE.SphereGeometry(0.045, 8, 8);
+
+  nodePositions.forEach(function(p) {
+    var dot = new THREE.Mesh(dotGeo, dotMat.clone());
+    dot.position.set(p[0], p[1], p[2]);
+    nodeGroup.add(dot);
+  });
+
+  /* Connection lines between nearby nodes */
+  var connMat = new THREE.LineBasicMaterial({ color: 0x4f6ef7, transparent: true, opacity: 0.10 });
+  var connPairs = [[0,1],[0,2],[1,2],[2,6],[3,0],[3,11],[4,1],[4,5],[5,7],[6,8],[7,11],[8,9],[9,10],[10,4],[10,8],[5,9]];
+  connPairs.forEach(function(pair) {
+    var a = nodePositions[pair[0]], b = nodePositions[pair[1]];
+    var geo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(a[0], a[1], a[2]),
+      new THREE.Vector3(b[0], b[1], b[2])
+    ]);
+    nodeGroup.add(new THREE.Line(geo, connMat.clone()));
+  });
+
+  /* ────────────────────────────────────────────────────
+     4. DATA STREAM PACKETS — points of light on paths
+  ──────────────────────────────────────────────────── */
+  var streamGroup = new THREE.Group();
+  masterGroup.add(streamGroup);
+
+  /* Each stream travels between two node indices */
+  var streamDefs = [
+    { from: 0, to: 2, speed: 0.0028, phase: 0.0   },
+    { from: 1, to: 4, speed: 0.0022, phase: 0.33  },
+    { from: 2, to: 6, speed: 0.0035, phase: 0.66  },
+    { from: 5, to: 9, speed: 0.0018, phase: 0.15  },
+    { from: 7, to:11, speed: 0.0030, phase: 0.50  },
+    { from: 8, to: 3, speed: 0.0025, phase: 0.80  },
+    { from: 9, to:10, speed: 0.0020, phase: 0.25  },
+    { from: 4, to: 5, speed: 0.0040, phase: 0.70  },
+  ];
+
+  var packetGeo = new THREE.SphereGeometry(0.06, 6, 6);
+  var packetMat = new THREE.MeshBasicMaterial({ color: 0x4f6ef7, transparent: true, opacity: 0.75 });
+  var packetMatTeal = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65 });
+
+  var streams = streamDefs.map(function(sd, i) {
+    var mat = (i % 3 === 0) ? packetMatTeal.clone() : packetMat.clone();
+    var mesh = new THREE.Mesh(packetGeo, mat);
+    mesh.visible = true;
+    streamGroup.add(mesh);
+    var aPos = nodePositions[sd.from];
+    var bPos = nodePositions[sd.to];
+    return {
+      mesh: mesh,
+      a: new THREE.Vector3(aPos[0], aPos[1], aPos[2]),
+      b: new THREE.Vector3(bPos[0], bPos[1], bPos[2]),
+      speed: sd.speed,
+      t: sd.phase
+    };
+  });
+
+  /* ────────────────────────────────────────────────────
+     5. AMBIENT DEPTH PARTICLES
+  ──────────────────────────────────────────────────── */
+  var particleCount = 140;
+  var pPositions = new Float32Array(particleCount * 3);
+  for (var i = 0; i < particleCount; i++) {
+    pPositions[i * 3    ] = (Math.random() - 0.5) * 28;
+    pPositions[i * 3 + 1] = (Math.random() - 0.5) * 16;
+    pPositions[i * 3 + 2] = -Math.random() * 20 - 1;
+  }
+  var pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+  var pMat = new THREE.PointsMaterial({ color: 0x4f6ef7, size: 0.04, transparent: true, opacity: 0.30 });
+  masterGroup.add(new THREE.Points(pGeo, pMat));
+
+  /* ────────────────────────────────────────────────────
+     6. MOUSE + RESIZE
+  ──────────────────────────────────────────────────── */
+  var mx = 0, my = 0, smx = 0, smy = 0;
+  document.addEventListener('mousemove', function(e) {
+    mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    my = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function resize() {
+    var w = hero.offsetWidth;
+    var h = hero.offsetHeight;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  /* ────────────────────────────────────────────────────
+     7. ANIMATION LOOP
+  ──────────────────────────────────────────────────── */
+  var clock = 0;
+  var tmp = new THREE.Vector3();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    clock += 0.004;
+
+    /* Smooth mouse lag */
+    smx += (mx - smx) * 0.035;
+    smy += (my - smy) * 0.035;
+
+    /* Gentle parallax on master group */
+    masterGroup.rotation.y += (smx * 0.045 - masterGroup.rotation.y) * 0.04;
+    masterGroup.rotation.x += (-smy * 0.025 - masterGroup.rotation.x) * 0.04;
+
+    /* Slow camera drift — cinematic float */
+    camera.position.y = 2.5 + Math.sin(clock * 0.18) * 0.18;
+    camera.position.x = Math.sin(clock * 0.11) * 0.22;
+    camera.lookAt(0, -1, 0);
+
+    /* Floating panels */
+    panels.forEach(function(p) {
+      var floatY = Math.sin(clock * 0.55 + p.phase) * 0.06;
+      p.mesh.position.y = p.baseY + floatY;
+      p.edge.position.y = p.baseY + floatY;
+    });
+
+    /* Grid slow drift into camera */
+    gridGroup.position.z = 2 + (clock * 0.08) % 1.4;
+
+    /* Data stream packets travel A→B then reset */
+    streams.forEach(function(s) {
+      s.t += s.speed;
+      if (s.t > 1.0) s.t = 0.0;
+      tmp.lerpVectors(s.a, s.b, s.t);
+      s.mesh.position.copy(tmp);
+      /* fade in/out at endpoints */
+      var fade = Math.min(s.t * 6, 1) * Math.min((1 - s.t) * 6, 1);
+      s.mesh.material.opacity = fade * 0.75;
+    });
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+/* NAV */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('stuck', scrollY > 60);
+});
+
+/* MOBILE MENU */
+document.getElementById('burger').addEventListener('click', function() {
+  document.getElementById('mob').classList.add('open');
+});
+document.getElementById('mobX').addEventListener('click', function() {
+  document.getElementById('mob').classList.remove('open');
+});
+document.querySelectorAll('#mob a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('mob').classList.remove('open');
+  });
+});
+
+/* SMOOTH SCROLL */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+/* REVEAL ON SCROLL */
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(function(el) { io.observe(el); });
+
+/* METRIC BARS */
+var bObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.metric-bar').forEach(function(b) { b.classList.add('go'); });
+      bObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.process-panel').forEach(function(el) { bObs.observe(el); });
+</script>
 </body>
 </html>
