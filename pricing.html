@@ -3,168 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing & Packages - Ascend Web Agency</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Pricing - Ascend Web Agency</title>
+    <meta name="description" content="Transparent website pricing from Ascend Web Agency: standard websites, advanced backend builds, and social media management.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="main-navbar">
-        <a href="index.html" class="logo">
-            <span class="logo-wordmark">Ascend Web Agency</span>
-        </a>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="services.html" class="nav-link">Services</a></li>
-            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-            <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
-            <li><a href="about.html" class="nav-link">About</a></li>
-            <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-        <a href="https://tally.so/r/2EXdoA" target="_blank" class="nav-get-quote">Get Quote</a>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div id="loader" aria-hidden="true"><div class="ldr-inner"><div class="ldr-word"><span>A</span><span>S</span><span>C</span><span>E</span><span>N</span><span>D</span></div><div class="ldr-line"></div></div></div>
+
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo" aria-label="Ascend Web Agency home"><span class="nav-logo-mark"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></span>Ascend Web Agency</a>
+        <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Work</a></li><li><a class="active" href="pricing.html">Pricing</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+        <a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="nav-cta">Get Quote</a>
+        <button class="nav-burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
 
-    <div class="page-header" style="padding-top: 120px; padding-bottom: 40px; text-align: center; background: var(--dark-light);">
-        <h1 class="section-title">Pricing & Web Packages</h1>
-        <p class="section-subtitle">Transparent pricing, straightforward packages, powered by Stripe.</p>
+    <div class="mob" id="mob" aria-hidden="true">
+        <button class="mob-x" id="mobX" type="button" aria-label="Close menu">&times;</button>
+        <a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Work</a><a class="active" href="pricing.html">Pricing</a><a href="about.html">About</a><a href="contact.html">Contact</a>
     </div>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section" style="padding: 4rem 0 8rem;">
-        <div class="container">
-            <div class="pricing-grid">
-                
-                <!-- Tier 1 -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Standard Website</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">600</span>
-                        </div>
-                        <p>A great looking, fully responsive website.</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Professional Design</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Mobile Responsive</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Basic SEO Setup</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Contact Form</li>
-                        <li class="disabled"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Backend Features</li>
-                    </ul>
-                    <!-- YOU MUST UPDATE THIS WITH YOUR STRIPE PAYMENT LINK -->
-                    <a href="https://buy.stripe.com/test_aFa6oAddP57MaKb6yS3VC02" class="btn btn-secondary btn-full">Order Standard Plan</a>
+    <main>
+        <section class="subhero">
+            <div class="subhero-grid"></div>
+            <div class="subhero-radial"></div>
+            <div class="w">
+                <div class="subhero-body rv on">
+                    <div class="kicker">Pricing</div>
+                    <h1 class="subhero-h">Clear packages.<br><em>No hidden fees.</em></h1>
+                    <p class="subhero-p">Straightforward website and social packages with secure Stripe checkout links. Custom work is quoted cleanly before anything starts.</p>
                 </div>
-
-                <!-- Tier 2 -->
-                <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3>Advanced Website + Backend</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">900</span>
-                        </div>
-                        <p>For more complex needs with backend features.</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Premium Professional Design</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Backend Integrations</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> More Complex Features</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Advanced SEO Setup</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> CMS Integration</li>
-                    </ul>
-                    <!-- YOU MUST UPDATE THIS WITH YOUR STRIPE PAYMENT LINK -->
-                    <a href="https://buy.stripe.com/test_bJefZa4Hj0RwcSj0au3VC01" class="btn btn-primary btn-full">Order Advanced Plan</a>
-                </div>
-
-                <!-- Tier 3 -->
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Social Media Management</h3>
-                        <div class="price">
-                            <span class="currency">$</span>
-                            <span class="amount">150</span>
-                            <span style="font-size: 1rem; color: var(--text-light); margin-top: auto; margin-bottom: 0.5rem;">/mo</span>
-                        </div>
-                        <p>We manage your socials to drive traffic.</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Content Creation</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Scheduled Posting</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Community Engagement</li>
-                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Strategy Sessions</li>
-                        <li class="disabled"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Website Included</li>
-                    </ul>
-                    <!-- YOU MUST UPDATE THIS WITH YOUR STRIPE PAYMENT LINK -->
-                    <a href="https://buy.stripe.com/test_14AcMYa1Dbwa05xbTc3VC00" class="btn btn-secondary btn-full">Subscribe Monthly</a>
-                </div>
-
             </div>
-            
-            <div class="custom-plan" style="margin-top: 4rem; text-align: center; background: rgba(20, 184, 166, 0.05); border: 1px solid rgba(20, 184, 166, 0.2); padding: 3rem; border-radius: 20px;">
-                <h3>Need something completely custom?</h3>
-                <p style="margin: 1rem 0 2rem; color: var(--text-light);">We also offer custom quotes for specialized applications, enterprise portals, or complex backend requirements.</p>
-                <a href="contact.html" class="btn btn-secondary">Contact for Custom Quote</a>
-            </div>
-            
-            <div class="stripe-trust" style="margin-top: 2rem; text-align: center;">
-                <p style="color: var(--gray); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Secure payments powered by Stripe
-                </p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">
-                        <span class="logo-wordmark">Ascend Web Agency</span>
-                    </a>
-                    <p>Ascending digital experiences, one website at a time.</p>
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" class="social-link" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" class="social-link" aria-label="TikTok">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                        </a>
-                    </div>
+        <section class="s section-pad">
+            <div class="w">
+                <div class="rv">
+                    <div class="kicker">Packages</div>
+                    <h2 class="sh">Choose the level<br><span class="it">that fits.</span></h2>
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Navigation</h4>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
+                <div class="plans rv">
+                    <div class="plan">
+                        <div class="plan-tier">Standard</div>
+                        <div class="plan-name">Standard Website</div>
+                        <div class="plan-desc">A great-looking, fully responsive site for businesses that need credibility online.</div>
+                        <div class="plan-price"><sup>$</sup>600</div>
+                        <div class="plan-note">One-time payment</div>
+                        <ul class="plan-list">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Professional design</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Mobile responsive</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Basic SEO setup</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Contact form</li>
+                            <li class="off"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Backend features</li>
                         </ul>
+                        <a href="https://buy.stripe.com/test_aFa6oAddP57MaKb6yS3VC02" class="pbtn ghost">Order Standard</a>
                     </div>
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="https://tally.so/r/2EXdoA" target="_blank">Get Quote</a></li>
+                    <div class="plan pop">
+                        <div class="plan-badge">Most Popular</div>
+                        <div class="plan-tier">Advanced</div>
+                        <div class="plan-name">Advanced + Backend</div>
+                        <div class="plan-desc">For builds that need custom logic, integrations, and deeper production polish.</div>
+                        <div class="plan-price"><sup>$</sup>900</div>
+                        <div class="plan-note">One-time payment</div>
+                        <ul class="plan-list">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Premium design</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Backend integrations</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Advanced SEO</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>CMS integration</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Complex features</li>
                         </ul>
+                        <a href="https://buy.stripe.com/test_bJefZa4Hj0RwcSj0au3VC01" class="pbtn primary">Order Advanced</a>
+                    </div>
+                    <div class="plan">
+                        <div class="plan-tier">Monthly</div>
+                        <div class="plan-name">Social Media Management</div>
+                        <div class="plan-desc">A monthly package for businesses that want consistent social presence.</div>
+                        <div class="plan-price"><sup>$</sup>150</div>
+                        <div class="plan-note">Per month, cancel anytime</div>
+                        <ul class="plan-list">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Content creation</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Scheduled posting</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Community engagement</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>Monthly strategy</li>
+                            <li class="off"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Website included</li>
+                        </ul>
+                        <a href="https://buy.stripe.com/test_14AcMYa1Dbwa05xbTc3VC00" class="pbtn ghost">Subscribe Monthly</a>
                     </div>
                 </div>
+                <div class="pricing-footer rv">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Secure payments via Stripe. Need custom scope? <a href="contact.html">Contact us</a>
+                </div>
             </div>
+        </section>
+
+        <section class="s section-pad section-bg section-line">
+            <div class="w">
+                <div class="split-head">
+                    <div class="rv">
+                        <div class="kicker">Details</div>
+                        <h2 class="sh">What keeps the price<br><span class="it">predictable.</span></h2>
+                    </div>
+                    <p class="lead rv d1">The package price is tied to a clear scope. If your project needs custom dashboards, complex automation, or deeper integrations, we quote it before build work begins.</p>
+                </div>
+                <div class="detail-grid rv">
+                    <div class="detail-card"><div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div><h3>Defined scope</h3><p>Pages, features, forms, payment links, and integrations are agreed before production starts.</p></div>
+                    <div class="detail-card"><div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div><h3>One-time builds</h3><p>Website packages are one-time payments. Monthly social management is billed separately.</p></div>
+                    <div class="detail-card"><div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3>Clean handoff</h3><p>You get a live site, ownership clarity, and support after launch for practical fixes.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="s cta-s">
+            <div class="cta-radial"></div><div class="cta-grid"></div>
+            <div class="w"><div class="cta-inner rv"><div class="kicker">Custom scope</div><h2 class="cta-h">Need something<br><em>bigger?</em></h2><p class="cta-sub">Send the project details and we will price the exact build instead of forcing it into the wrong package.</p><div class="cta-actions"><a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="btn-p">Get a custom quote <svg viewBox="0 0 20 20"><path d="M4 10h12M10 4l6 6-6 6"></path></svg></a><a href="mailto:ascendwebagency1@gmail.com" class="cta-email">ascendwebagency1@gmail.com</a></div></div></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="foot-row">
+            <a href="index.html" class="foot-logo"><div class="foot-logo-m"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></div>Ascend Web Agency</a>
+            <nav class="foot-links" aria-label="Footer navigation"><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="portfolio.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <div class="foot-soc">
+                <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" rel="noopener" class="soc-a" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" rel="noopener" class="soc-a" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" rel="noopener" class="soc-a" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+            </div>
+            <div class="foot-copy">&copy; 2026 Ascend Web Agency. Custom web development, built clean.</div>
         </div>
     </footer>
 

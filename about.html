@@ -4,193 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Ascend Web Agency</title>
-    <meta name="description" content="Meet the team behind Ascend Web Agency — frontend and backend developers dedicated to building high-quality websites for growing businesses.">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Ascend Web Agency is a development-focused web agency building fast custom websites for businesses that need quality code and polished design.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="main-navbar">
-        <a href="index.html" class="logo">
-            <span class="logo-wordmark">Ascend Web Agency</span>
-        </a>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="services.html" class="nav-link">Services</a></li>
-            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-            <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-            <li><a href="about.html" class="nav-link active">About</a></li>
-            <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-        <a href="https://tally.so/r/2EXdoA" target="_blank" class="nav-get-quote">Get Quote</a>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div id="loader" aria-hidden="true"><div class="ldr-inner"><div class="ldr-word"><span>A</span><span>S</span><span>C</span><span>E</span><span>N</span><span>D</span></div><div class="ldr-line"></div></div></div>
+
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo" aria-label="Ascend Web Agency home"><span class="nav-logo-mark"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></span>Ascend Web Agency</a>
+        <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Work</a></li><li><a href="pricing.html">Pricing</a></li><li><a class="active" href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+        <a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="nav-cta">Get Quote</a>
+        <button class="nav-burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </nav>
 
-    <div class="page-header" style="padding-top: 120px; padding-bottom: 40px; text-align: center; background: var(--dark-light);">
-        <h1 class="section-title">About Us</h1>
-        <p class="section-subtitle">The team behind your next digital breakthrough</p>
+    <div class="mob" id="mob" aria-hidden="true">
+        <button class="mob-x" id="mobX" type="button" aria-label="Close menu">&times;</button>
+        <a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Work</a><a href="pricing.html">Pricing</a><a class="active" href="about.html">About</a><a href="contact.html">Contact</a>
     </div>
 
-    <!-- About Section -->
-    <section class="about-section" style="padding: 6rem 0 3rem;">
-        <div class="container">
-            <div class="about-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
-                <div class="about-content">
-                    <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 1.5rem;">Built by Developers, Driven by Results</h2>
-                    <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-                        Ascend Web Agency was founded on the belief that small and medium businesses deserve the same digital firepower as large corporations. We're a team of frontend and backend developers who care about more than just pretty pages — we care about what those pages do for your business.
-                    </p>
-                    <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
-                        Whether you're a local shop that needs a landing page or a growing brand that needs a full e-commerce store with backend logic, our team has the depth to handle it. We write real code, ship fast, and stay in your corner after launch.
-                    </p>
-                    <div style="display: flex; gap: 2.5rem; flex-wrap: wrap;">
-                        <div>
-                            <h4 style="font-size: 2rem; color: var(--teal); margin-bottom: 0.25rem;">100%</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">Commitment</p>
-                        </div>
-                        <div>
-                            <h4 style="font-size: 2rem; color: var(--lime); margin-bottom: 0.25rem;">Post-Launch</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">Care & Support</p>
-                        </div>
-                        <div>
-                            <h4 style="font-size: 2rem; color: var(--teal); margin-bottom: 0.25rem;">5-7</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">Business Days</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <!-- Team capability cards -->
-                    <div class="team-capabilities">
-                        <div class="capability-card">
-                            <div class="capability-icon" style="background: linear-gradient(135deg, rgba(20,184,166,0.15), rgba(20,184,166,0.05)); border: 1px solid rgba(20,184,166,0.3);">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" width="28" height="28">
-                                    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Frontend Development</h4>
-                                <p>React, Next.js, Vanilla HTML/CSS — pixel-perfect, fast, and responsive.</p>
-                            </div>
-                        </div>
-                        <div class="capability-card">
-                            <div class="capability-icon" style="background: linear-gradient(135deg, rgba(132,204,22,0.15), rgba(132,204,22,0.05)); border: 1px solid rgba(132,204,22,0.3);">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="2" width="28" height="28">
-                                    <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Backend Development</h4>
-                                <p>APIs, databases, auth flows, and server logic — we handle the full stack.</p>
-                            </div>
-                        </div>
-                        <div class="capability-card">
-                            <div class="capability-icon" style="background: linear-gradient(135deg, rgba(20,184,166,0.15), rgba(20,184,166,0.05)); border: 1px solid rgba(20,184,166,0.3);">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" width="28" height="28">
-                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>E-Commerce & Integrations</h4>
-                                <p>Stripe, CMS, third-party APIs — built in and working from day one.</p>
-                            </div>
-                        </div>
-                        <div class="capability-card">
-                            <div class="capability-icon" style="background: linear-gradient(135deg, rgba(132,204,22,0.15), rgba(132,204,22,0.05)); border: 1px solid rgba(132,204,22,0.3);">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="2" width="28" height="28">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Post-Launch Support</h4>
-                                <p>We don't disappear after delivery. Updates, fixes, and hosting help included.</p>
-                            </div>
-                        </div>
-                    </div>
+    <main>
+        <section class="subhero">
+            <div class="subhero-grid"></div>
+            <div class="subhero-radial"></div>
+            <div class="w">
+                <div class="subhero-body rv on">
+                    <div class="kicker">About</div>
+                    <h1 class="subhero-h">Built by developers.<br><em>Driven by results.</em></h1>
+                    <p class="subhero-p">Ascend exists for businesses that want the polish of a premium site and the durability of real code.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Why Us Section -->
-    <section style="padding: 4rem 0 6rem; background: var(--dark-light);">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why Choose Ascend?</h2>
-                <p class="section-subtitle">We're not a template factory. Here's what sets us apart.</p>
-            </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-number">01</div>
-                    <h3>Real Code, Not Templates</h3>
-                    <p>Every site we build is written from scratch. No Wix, no Squarespace, no bloated page builders. You get clean, fast, custom code.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-number">02</div>
-                    <h3>A Full Team Behind You</h3>
-                    <p>You're not working with a one-person shop guessing at backend logic. Our team covers both frontend and backend — so nothing gets pieced together badly.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-number">03</div>
-                    <h3>Fast Turnaround</h3>
-                    <p>Most projects are delivered in 5-7 business days. We move fast without cutting corners, because your time is money.</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-number">04</div>
-                    <h3>Transparent Pricing</h3>
-                    <p>No surprise invoices. What you see on our pricing page is what you pay. Simple, honest, upfront.</p>
+        <section class="s section-pad">
+            <div class="w">
+                <div class="about-layout">
+                    <div class="rv">
+                        <div class="kicker">Who we are</div>
+                        <h2 class="sh">A focused team for<br><span class="it">custom web builds.</span></h2>
+                        <p class="lead">Ascend Web Agency was founded on a simple belief: small and medium businesses deserve the same digital firepower as larger companies. We care about how the site looks, but we care just as much about how it is structured, how fast it loads, and how clearly it supports the business.</p>
+                        <p class="lead" style="margin-top:1.25rem">Whether the project is a lean landing page, a full e-commerce site, or a backend-enabled build, the work stays grounded in clean execution and honest scope.</p>
+                    </div>
+                    <div class="about-panel rv d1">
+                        <div class="process-panel-tag">Operating standard</div>
+                        <h3 class="process-panel-h">No dragged-in templates.<br>No bloated builders.</h3>
+                        <p class="process-panel-p">The goal is a website you can be proud to show customers and practical enough to maintain after launch.</p>
+                        <div class="metrics">
+                            <div class="metric-row"><div class="metric-top"><span>Custom code</span><span>100%</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:var(--blue)"></div></div></div>
+                            <div class="metric-row"><div class="metric-top"><span>Post-launch care</span><span>Included</span></div><div class="metric-track"><div class="metric-bar" style="width:90%;background:var(--teal)"></div></div></div>
+                            <div class="metric-row"><div class="metric-top"><span>Typical delivery</span><span>5-7 days</span></div><div class="metric-track"><div class="metric-bar" style="width:86%;background:var(--green)"></div></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">
-                        <span class="logo-wordmark">Ascend Web Agency</span>
-                    </a>
-                    <p>Ascending digital experiences, one website at a time.</p>
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" class="social-link" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" class="social-link" aria-label="TikTok">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Navigation</h4>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="https://tally.so/r/2EXdoA" target="_blank">Get Quote</a></li>
-                        </ul>
-                    </div>
+        <section class="s stats-s">
+            <div class="w">
+                <div class="stats-row">
+                    <div class="stat rv"><div class="stat-n">100%</div><div class="stat-l">Custom Code</div></div>
+                    <div class="stat rv d1"><div class="stat-n">5-7</div><div class="stat-l">Business Days</div></div>
+                    <div class="stat rv d2"><div class="stat-n">24hr</div><div class="stat-l">Reply Window</div></div>
+                    <div class="stat rv d3"><div class="stat-n">0</div><div class="stat-l">Template Builders</div></div>
                 </div>
             </div>
+        </section>
+
+        <section class="s section-pad">
+            <div class="w">
+                <div class="split-head">
+                    <div class="rv">
+                        <div class="kicker">Why choose Ascend</div>
+                        <h2 class="sh">The difference is in<br><span class="it">the execution.</span></h2>
+                    </div>
+                    <p class="lead rv d1">The site should not just look newer. It should load faster, communicate more clearly, and feel easier for customers to trust.</p>
+                </div>
+                <div class="value-grid rv">
+                    <div class="value-card"><div class="value-num">01</div><h3>Real code</h3><p>Hand-built structure instead of a page builder buried under plugins and fragile settings.</p></div>
+                    <div class="value-card"><div class="value-num">02</div><h3>Full-stack range</h3><p>Frontend, backend, integrations, and launch details can all be handled in one build.</p></div>
+                    <div class="value-card"><div class="value-num">03</div><h3>Fast delivery</h3><p>Most scoped websites move from brief to launch in 5-7 business days.</p></div>
+                    <div class="value-card"><div class="value-num">04</div><h3>Clear pricing</h3><p>No surprise invoices. Scope and cost are clear before production starts.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="s cta-s section-line">
+            <div class="cta-radial"></div><div class="cta-grid"></div>
+            <div class="w"><div class="cta-inner rv"><div class="kicker">Work with us</div><h2 class="cta-h">Bring the brief.<br><em>We will build.</em></h2><p class="cta-sub">Send what you need and Ascend will return a practical plan, price, and timeline.</p><div class="cta-actions"><a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="btn-p">Start your project <svg viewBox="0 0 20 20"><path d="M4 10h12M10 4l6 6-6 6"></path></svg></a><a href="contact.html" class="cta-email">Contact page</a></div></div></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="foot-row">
+            <a href="index.html" class="foot-logo"><div class="foot-logo-m"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></div>Ascend Web Agency</a>
+            <nav class="foot-links" aria-label="Footer navigation"><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="portfolio.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <div class="foot-soc">
+                <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" rel="noopener" class="soc-a" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" rel="noopener" class="soc-a" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" rel="noopener" class="soc-a" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+            </div>
+            <div class="foot-copy">&copy; 2026 Ascend Web Agency. Custom web development, built clean.</div>
         </div>
     </footer>
 

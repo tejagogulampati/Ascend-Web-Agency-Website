@@ -4,164 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Ascend Web Agency</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Custom web development, responsive design, backend systems, e-commerce, performance optimization, and support from Ascend Web Agency.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="main-navbar">
-        <a href="index.html" class="logo">
-            <span class="logo-wordmark">Ascend Web Agency</span>
-        </a>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="services.html" class="nav-link active">Services</a></li>
-            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-            <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-            <li><a href="about.html" class="nav-link">About</a></li>
-            <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-        <a href="https://tally.so/r/2EXdoA" target="_blank" class="nav-get-quote">Get Quote</a>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <div id="loader" aria-hidden="true">
+        <div class="ldr-inner">
+            <div class="ldr-word"><span>A</span><span>S</span><span>C</span><span>E</span><span>N</span><span>D</span></div>
+            <div class="ldr-line"></div>
         </div>
-    </nav>
-
-    <div class="page-header" style="padding-top: 120px; padding-bottom: 40px; text-align: center; background: var(--dark-light);">
-        <h1 class="section-title">Our Services</h1>
-        <p class="section-subtitle">Comprehensive web solutions tailored to your needs</p>
     </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services" style="padding-top: 4rem;">
-        <div class="container">
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <h3>Custom Web Development</h3>
-                    <p>Bespoke websites built from the ground up, designed to perfectly match your brand and business goals.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                            <path d="M9 9h6v6H9z"/>
-                        </svg>
-                    </div>
-                    <h3>Responsive Design</h3>
-                    <p>Mobile-first designs that look stunning and function flawlessly across all devices and screen sizes.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                        </svg>
-                    </div>
-                    <h3>Performance Optimization</h3>
-                    <p>Lightning-fast load times and smooth user experiences that keep visitors engaged and convert better.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                        </svg>
-                    </div>
-                    <h3>Brand Identity</h3>
-                    <p>Cohesive visual identities that tell your story and create memorable connections with your audience.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                    </div>
-                    <h3>E-Commerce Solutions</h3>
-                    <p>Powerful online stores that drive sales and provide seamless shopping experiences for your customers.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                    </div>
-                    <h3>Ongoing Support</h3>
-                    <p>Continuous maintenance, updates, and support to keep your website running smoothly and securely.</p>
-                </div>
-            </div>
-            
-            <!-- Additional Depth section -->
-            <div class="services-detailed" style="margin-top: 6rem;">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Our Process</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                    <div class="process-step" style="padding: 2rem; background: var(--dark-light); border-radius: 16px;">
-                        <h4 style="color: var(--teal); font-size: 1.5rem; margin-bottom: 1rem;">01. Discovery</h4>
-                        <p style="color: var(--text-light);">We start by learning about your business, goals, and target audience to architect a perfect digital strategy.</p>
-                    </div>
-                    <div class="process-step" style="padding: 2rem; background: var(--dark-light); border-radius: 16px;">
-                        <h4 style="color: var(--teal); font-size: 1.5rem; margin-bottom: 1rem;">02. Design</h4>
-                        <p style="color: var(--text-light);">We craft beautiful, high-converting mockups that seamlessly integrate with your brand identity.</p>
-                    </div>
-                    <div class="process-step" style="padding: 2rem; background: var(--dark-light); border-radius: 16px;">
-                        <h4 style="color: var(--teal); font-size: 1.5rem; margin-bottom: 1rem;">03. Development</h4>
-                        <p style="color: var(--text-light);">Our developers bring the designs to life with clean, modular, and optimized code.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo" aria-label="Ascend Web Agency home">
+            <span class="nav-logo-mark"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></span>
+            Ascend Web Agency
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Work</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <a href="https://tally.so/r/2EXdoA" target="_blank" rel="noopener" class="nav-cta">Get Quote</a>
+        <button class="nav-burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </nav>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">
-                        <span class="logo-wordmark">Ascend Web Agency</span>
-                    </a>
-                    <p>Ascending digital experiences, one website at a time.</p>
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" class="social-link" aria-label="Instagram">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" class="social-link" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" class="social-link" aria-label="TikTok">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="17" height="17"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Navigation</h4>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="https://tally.so/r/2EXdoA" target="_blank">Get Quote</a></li>
-                        </ul>
+    <div class="mob" id="mob" aria-hidden="true">
+        <button class="mob-x" id="mobX" type="button" aria-label="Close menu">&times;</button>
+        <a href="index.html">Home</a>
+        <a class="active" href="services.html">Services</a>
+        <a href="portfolio.html">Work</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <main>
+        <section class="subhero">
+            <div class="subhero-grid"></div>
+            <div class="subhero-radial"></div>
+            <div class="w">
+                <div class="subhero-body rv on">
+                    <div class="kicker">Services</div>
+                    <h1 class="subhero-h">Everything your site needs to <em>ship clean.</em></h1>
+                    <p class="subhero-p">From first concept through backend logic and post-launch support, Ascend keeps the build cohesive instead of stitching together a pile of tools.</p>
+                    <div class="subhero-actions">
+                        <a href="pricing.html" class="btn-p">See packages <svg viewBox="0 0 20 20"><path d="M4 10h12M10 4l6 6-6 6"></path></svg></a>
+                        <a href="contact.html" class="btn-s">Talk through scope</a>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="s section-pad">
+            <div class="w">
+                <div class="split-head">
+                    <div class="rv">
+                        <div class="kicker">Core capabilities</div>
+                        <h2 class="sh">Premium execution.<br><span class="it">No template noise.</span></h2>
+                    </div>
+                    <p class="lead rv d1">Every service is built around the same goal: a site that loads fast, reads clearly, looks premium, and gives the business something it can actually use.</p>
+                </div>
+                <div class="svc-grid rv">
+                    <div class="svc"><div class="svc-n">01</div><div class="svc-ico"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div><h3 class="svc-h">Custom Web Development</h3><p class="svc-p">Bespoke websites built from the ground up to match your business, content, and conversion goals.</p></div>
+                    <div class="svc"><div class="svc-n">02</div><div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12" y2="18"></line></svg></div><h3 class="svc-h">Responsive Design</h3><p class="svc-p">Layouts that adapt cleanly across phones, tablets, laptops, and wide desktop screens.</p></div>
+                    <div class="svc"><div class="svc-n">03</div><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div><h3 class="svc-h">Performance Optimization</h3><p class="svc-p">Lean assets, clean code, and interaction details that keep pages feeling fast and intentional.</p></div>
+                    <div class="svc"><div class="svc-n">04</div><div class="svc-ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div><h3 class="svc-h">Backend Development</h3><p class="svc-p">APIs, databases, auth flows, dashboards, and integrations for projects that need real logic.</p></div>
+                    <div class="svc"><div class="svc-n">05</div><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><h3 class="svc-h">E-Commerce Solutions</h3><p class="svc-p">Storefronts, product pages, checkout flows, Stripe links, and setup that supports real sales.</p></div>
+                    <div class="svc"><div class="svc-n">06</div><div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3 class="svc-h">Ongoing Support</h3><p class="svc-p">Updates, bug fixes, hosting help, and small improvements after the website is live.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="s section-pad section-bg section-line">
+            <div class="w">
+                <div class="rv">
+                    <div class="kicker">Process</div>
+                    <h2 class="sh">A tighter path from idea<br><span class="it">to launch.</span></h2>
+                </div>
+                <div class="process-layout">
+                    <div class="steps rv d1">
+                        <div class="step"><div class="step-n">01</div><div><h3 class="step-h">Scope</h3><p class="step-p">We define the pages, content, required features, payment links, and technical needs up front.</p></div></div>
+                        <div class="step"><div class="step-n">02</div><div><h3 class="step-h">Design</h3><p class="step-p">The visual direction is shaped before code so the build has a clear standard to hit.</p></div></div>
+                        <div class="step"><div class="step-n">03</div><div><h3 class="step-h">Build</h3><p class="step-p">The site is developed with responsive layouts, clean structure, and production-ready details.</p></div></div>
+                        <div class="step"><div class="step-n">04</div><div><h3 class="step-h">Launch</h3><p class="step-p">We deploy, test, connect forms or payments, and stay available after release.</p></div></div>
+                    </div>
+                    <div class="process-panel rv d2">
+                        <div class="process-panel-tag">What you get</div>
+                        <h3 class="process-panel-h">A finished website, not a folder of loose pieces.</h3>
+                        <p class="process-panel-p">The final handoff includes the live site, source code, basic SEO structure, responsive checks, and a clean path for changes later.</p>
+                        <div class="metrics">
+                            <div class="metric-row"><div class="metric-top"><span>Design polish</span><span>High</span></div><div class="metric-track"><div class="metric-bar" style="width:96%;background:var(--blue)"></div></div></div>
+                            <div class="metric-row"><div class="metric-top"><span>Mobile readiness</span><span>100%</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:var(--teal)"></div></div></div>
+                            <div class="metric-row"><div class="metric-top"><span>Code ownership</span><span>100%</span></div><div class="metric-track"><div class="metric-bar" style="width:100%;background:var(--green)"></div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="s cta-s">
+            <div class="cta-radial"></div>
+            <div class="cta-grid"></div>
+            <div class="w">
+                <div class="cta-inner rv">
+                    <div class="kicker">Ready</div>
+                    <h2 class="cta-h">Pick the build<br><em>you need.</em></h2>
+                    <p class="cta-sub">Compare the packages or send the project details if your build needs custom scope.</p>
+                    <div class="cta-actions">
+                        <a href="pricing.html" class="btn-p">View pricing <svg viewBox="0 0 20 20"><path d="M4 10h12M10 4l6 6-6 6"></path></svg></a>
+                        <a href="contact.html" class="cta-email">Contact Ascend</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="foot-row">
+            <a href="index.html" class="foot-logo"><div class="foot-logo-m"><svg viewBox="0 0 14 14"><polyline points="2 10 7 4 12 10"></polyline><line x1="7" y1="4" x2="7" y2="13"></line></svg></div>Ascend Web Agency</a>
+            <nav class="foot-links" aria-label="Footer navigation"><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="portfolio.html">Work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <div class="foot-soc">
+                <a href="https://www.instagram.com/ascendwebagency1/" target="_blank" rel="noopener" class="soc-a" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                <a href="https://www.linkedin.com/company/ascend-web-agency" target="_blank" rel="noopener" class="soc-a" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                <a href="https://www.tiktok.com/@ascend.web.agency" target="_blank" rel="noopener" class="soc-a" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+            </div>
+            <div class="foot-copy">&copy; 2026 Ascend Web Agency. Custom web development, built clean.</div>
         </div>
     </footer>
 
